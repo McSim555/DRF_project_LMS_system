@@ -146,6 +146,21 @@ files = [
 python-dotenv = "*"
 
 [[package]]
+name = "isort"
+version = "8.0.1"
+description = "A Python utility / library to sort Python imports."
+optional = false
+python-versions = ">=3.10.0"
+groups = ["main"]
+files = [
+    {file = "isort-8.0.1-py3-none-any.whl", hash = "sha256:28b89bc70f751b559aeca209e6120393d43fbe2490de0559662be7a9787e3d75"},
+    {file = "isort-8.0.1.tar.gz", hash = "sha256:171ac4ff559cdc060bcfff550bc8404a486fee0caab245679c2abe7cb253c78d"},
+]
+
+[package.extras]
+colors = ["colorama"]
+
+[[package]]
 name = "mypy-extensions"
 version = "1.1.0"
 description = "Type system extensions for programs checked with the mypy type checker."
@@ -391,6 +406,18 @@ files = [
 dev = ["black", "build", "mypy", "pytest", "pytest-cov", "setuptools", "tox", "twine", "wheel"]
 
 [[package]]
+name = "shell"
+version = "1.0.1"
+description = "A better way to run shell commands in Python."
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "shell-1.0.1-py2.py3-none-any.whl", hash = "sha256:64e3347d1dd2c8f3c3f3df5e6ebe9084d768ae20985aef6793854b9f47d4045a"},
+    {file = "shell-1.0.1.tar.gz", hash = "sha256:6fbaa88f85de228ddecef33cb1e9037f4959f6f76942b01769e4139a038f6513"},
+]
+
+[[package]]
 name = "sqlparse"
 version = "0.5.5"
 description = "A non-validating SQL parser."
@@ -422,4 +449,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.14"
-content-hash = "b2ddc722b8a67afa7bb8ad9d715bb30cf1952e12a38a73cfce9e181e300a20b1"
+content-hash = "c49c5a480a4a598a50020a766b9bf0eec16f3b3b3dbd0b0d94924b28db64bca2"
