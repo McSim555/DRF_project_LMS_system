@@ -15,19 +15,20 @@ class CourseSerializer(ModelSerializer):
         model = Course
         fields = "__all__"
 
+
 class CourseDetailSerializer(ModelSerializer):
-    lessons = LessonSerializer(many=True, source='lesson')
+    lessons = LessonSerializer(many=True, source="lesson")
     lessons_number = SerializerMethodField()
+
     class Meta:
         model = Course
-        fields = ['name', 'image', 'description', 'lessons', 'lessons_number']
+        fields = ["name", "image", "description", "lessons", "lessons_number"]
 
     def get_lessons_number(self, obj):
-            return obj.lesson.count()
+        return obj.lesson.count()
 
 
 class PaymentSerializer(ModelSerializer):
     class Meta:
         model = Payment
         fields = "__all__"
-
