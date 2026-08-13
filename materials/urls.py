@@ -4,12 +4,13 @@ from rest_framework.routers import SimpleRouter
 from materials.apps import MaterialsConfig
 from materials.views import (CourseViewSet, LessonCreateAPIView,
                              LessonDestroyAPIView, LessonListAPIView,
-                             LessonRetrieveAPIView, LessonUpdateAPIView)
+                             LessonRetrieveAPIView, LessonUpdateAPIView, PaymentViewSet)
 
 app_name = MaterialsConfig.name
 
 router = SimpleRouter()
 router.register("courses", CourseViewSet, basename="course")
+router.register("payments", PaymentViewSet, basename="payment")
 
 urlpatterns = [
     path("lesson/create/", LessonCreateAPIView.as_view(), name="create_lesson"),

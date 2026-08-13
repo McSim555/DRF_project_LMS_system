@@ -80,5 +80,6 @@ class Payment(models.Model):
         help_text="Выберите курс", related_name="paid_course", blank=True, null=True)
     paid_lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name="Оплаченный урок",
         help_text="Выберите урок", related_name="paid_lesson", blank=True, null=True)
-    paid_amount = models.DecimalField(verbose_name='Сумма платежа', help_text='Введите сумму платежа')
+    paid_amount = models.DecimalField(verbose_name='Сумма платежа', help_text='Введите сумму платежа', max_digits=10,
+    decimal_places=2, default=0.00, null=True, blank=True)
     payment_type = models.CharField(choices=PAYMENT_CHOICES, verbose_name='Способ платежа', help_text='Выберите способ платежа')
