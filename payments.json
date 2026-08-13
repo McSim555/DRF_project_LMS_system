@@ -1,6 +1,6 @@
  [
   {
-    "model": "materials.payment",
+    "model": "users.payment",
     "fields": {
       "user": 1,
       "payment_date": "2026-08-03",
@@ -11,7 +11,7 @@
     }
   },
            {
-    "model": "materials.payment",
+    "model": "users.payment",
     "fields": {
       "user": 1,
       "payment_date": "2026-08-04",
@@ -22,7 +22,7 @@
     }
   },
            {
-    "model": "materials.payment",
+    "model": "users.payment",
     "fields": {
       "user": 1,
       "payment_date": "2026-08-09",

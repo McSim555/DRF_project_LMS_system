@@ -9,14 +9,12 @@ from materials.views import (
     LessonListAPIView,
     LessonRetrieveAPIView,
     LessonUpdateAPIView,
-    PaymentViewSet,
 )
 
 app_name = MaterialsConfig.name
 
 router = SimpleRouter()
 router.register("courses", CourseViewSet, basename="course")
-router.register("payments", PaymentViewSet, basename="payment")
 
 urlpatterns = [
     path("lesson/create/", LessonCreateAPIView.as_view(), name="create_lesson"),
