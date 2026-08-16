@@ -40,7 +40,6 @@ class User(AbstractUser):
         verbose_name_plural = "Пользователи"
 
 
-
 PAYMENT_CHOICES = [
     ("cash", "Наличные"),
     ("transfer", " на счет"),
