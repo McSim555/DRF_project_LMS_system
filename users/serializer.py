@@ -33,3 +33,13 @@ class UserSerializer(ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        request = self.context.get("request")
+        if request and request.user.is_authenticated:
+            if instance != request.user:
+                data.pop("last_name", None)
+                data.pop("payments", None)
+                data.pop("password", None)
+        return data
