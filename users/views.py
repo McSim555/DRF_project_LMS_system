@@ -3,8 +3,8 @@ from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from users.models import User, Payment
-from users.serializer import UserSerializer, PaymentSerializer
+from users.models import Payment, User
+from users.serializer import PaymentSerializer, UserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -12,7 +12,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     def get_permissions(self):
-        if self.action == 'create':
+        if self.action == "create":
             return [AllowAny()]
         return [IsAuthenticated()]
 
