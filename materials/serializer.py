@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
+from rest_framework.relations import PrimaryKeyRelatedField
 from rest_framework.serializers import ModelSerializer
 
 from materials.models import Course, Lesson, Subscription
@@ -8,7 +9,10 @@ from users.models import Payment
 
 
 class LessonSerializer(ModelSerializer):
-    video_link = serializers.URLField(validators=[validate_links])
+    video_link = serializers.URLField(
+        allow_blank=True, allow_null=True, validators=[validate_links], required=False
+    )
+    owner = PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Lesson
@@ -53,10 +57,3 @@ class CourseDetailSerializer(ModelSerializer):
         if request and request.user.is_authenticated:
             return obj.subscription.filter(user=request.user).exists()
         return False
-
-
-# class SubscriptionSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Subscription
-#         fields = ['id', 'user', 'course', 'created_at']
-#         read_only_fields = ['user', 'created_at']
