@@ -2,7 +2,7 @@
   {
     "model": "users.payment",
     "fields": {
-      "user": 1,
+      "user": 3,
       "payment_date": "2026-08-03",
       "paid_course": 2,
       "paid_lesson": null,
@@ -13,7 +13,7 @@
            {
     "model": "users.payment",
     "fields": {
-      "user": 1,
+      "user": 3,
       "payment_date": "2026-08-04",
       "paid_course": null,
       "paid_lesson": 3,
@@ -24,7 +24,7 @@
            {
     "model": "users.payment",
     "fields": {
-      "user": 1,
+      "user": 3,
       "payment_date": "2026-08-09",
       "paid_course": 3,
       "paid_lesson": null,
