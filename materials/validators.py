@@ -1,6 +1,7 @@
 from rest_framework.serializers import ValidationError
 
-allowed_links = 'youtube.com'
+allowed_links = "youtube.com"
+
 
 def validate_links(link):
     if allowed_links not in link:
