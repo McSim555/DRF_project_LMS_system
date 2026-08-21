@@ -99,6 +99,8 @@ class SubscriptionToggleView(APIView):
 
         subscription = Subscription.objects.filter(user=user, course=course)
 
+
+
         if subscription.exists():
             subscription.delete()
             message = "Подписка удалена"
