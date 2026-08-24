@@ -1,5 +1,7 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import generics, viewsets
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import generics, status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -89,6 +91,35 @@ class LessonDestroyAPIView(generics.DestroyAPIView):
 class SubscriptionToggleView(APIView):
     permission_classes = [IsAuthenticated]
 
+    @swagger_auto_schema(
+        operation_description="Подписаться или отписаться от курса",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                "course": openapi.Schema(
+                    type=openapi.TYPE_INTEGER, description="ID курса"
+                ),
+            },
+            required=["course"],
+        ),
+        responses={
+            status.HTTP_200_OK: openapi.Response(
+                description="Успешное выполнение",
+                examples={"application/json": {"message": "Подписка добавлена"}},
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                description="Ошибка валидации",
+                examples={"application/json": {"error": "Не указан ID курса"}},
+            ),
+            status.HTTP_404_NOT_FOUND: openapi.Response(
+                description="Курс не найден",
+                examples={"application/json": {"detail": "Страница не найдена."}},
+            ),
+            status.HTTP_401_UNAUTHORIZED: openapi.Response(
+                description="Неавторизованный запрос",
+            ),
+        },
+    )
     def post(self, request, *args, **kwargs):
         user = request.user
         course_id = request.data.get("course")
@@ -98,8 +129,6 @@ class SubscriptionToggleView(APIView):
         course = get_object_or_404(Course, id=course_id)
 
         subscription = Subscription.objects.filter(user=user, course=course)
-
-
 
         if subscription.exists():
             subscription.delete()
