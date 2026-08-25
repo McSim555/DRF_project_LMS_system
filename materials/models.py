@@ -31,6 +31,12 @@ class Course(models.Model):
         verbose_name="Владелец курса",
         help_text="Введите владельца курса",
     )
+    price = models.DecimalField(
+        verbose_name="Цена курса",
+        help_text="Укажите цену курса",
+        blank=True,
+        null=True,
+    )
 
     class Meta:
         verbose_name = "Курс"
