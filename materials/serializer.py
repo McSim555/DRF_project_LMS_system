@@ -3,9 +3,8 @@ from rest_framework.fields import SerializerMethodField
 from rest_framework.relations import PrimaryKeyRelatedField
 from rest_framework.serializers import ModelSerializer
 
-from materials.models import Course, Lesson, Subscription
+from materials.models import Course, Lesson
 from materials.validators import validate_links
-from users.models import Payment
 
 
 class LessonSerializer(ModelSerializer):
@@ -47,6 +46,7 @@ class CourseDetailSerializer(ModelSerializer):
             "lessons",
             "lessons_number",
             "is_subscribed",
+            "price",
         ]
 
     def get_lessons_number(self, obj):

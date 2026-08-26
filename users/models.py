@@ -94,8 +94,25 @@ class Payment(models.Model):
         null=True,
         blank=True,
     )
+
     payment_type = models.CharField(
         choices=PAYMENT_CHOICES,
         verbose_name="Способ платежа",
         help_text="Выберите способ платежа",
+    )
+
+    session_id = models.CharField(
+        max_length=255,
+        verbose_name="id сессии оплаты",
+        help_text="Укажите id сессии",
+        blank=True,
+        null=True,
+    )
+
+    link = models.URLField(
+        max_length=950,
+        verbose_name="Ссылка для оплаты",
+        help_text="Укажите ссылку для оплаты",
+        blank=True,
+        null=True,
     )
