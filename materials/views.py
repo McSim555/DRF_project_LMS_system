@@ -45,6 +45,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         return super().get_permissions()
 
     def perform_update(self, serializer):
+        """При актуализации курса отправка e-mail подписчикам"""
         course = serializer.save()
         subscriptions = Subscription.objects.filter(
             course=course, user__isnull=False, user__email__isnull=False

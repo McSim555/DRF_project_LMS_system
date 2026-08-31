@@ -10,6 +10,7 @@ from users.models import User
 
 @shared_task
 def send_e_mail(user_id, course_id):
+    """Функция отправки e-mail пользователям в заданным id с информацией об обновлении заданного курса"""
     try:
         user = User.objects.get(id=user_id)
         course = Course.objects.get(id=course_id)

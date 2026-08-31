@@ -8,6 +8,7 @@ from users.models import User
 
 @shared_task
 def deactivate_user_by_last_login_date():
+    """Функция деактивации пользователя, если с момента последнего login прошло больше 31 дня"""
     cutoff_date = timezone.now() - timedelta(days=31)
 
     users_to_deactivate = User.objects.filter(
