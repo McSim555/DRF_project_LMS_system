@@ -15,7 +15,7 @@ def send_e_mail(user_id, course_id):
         course = Course.objects.get(id=course_id)
 
         send_mail(
-            subject='Обновление курса',
+            subject="Обновление курса",
             message=f'Курс "{course.name}" был обновлен',
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[user.email],

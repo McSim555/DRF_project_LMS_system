@@ -150,3 +150,10 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+CELERY_BEAT_SCHEDULE = {
+    'task-name': {
+        'task': 'users.tasks.deactivate_user_by_last_login_date',
+        'schedule': timedelta(days=1),  # Расписание выполнения задачи (например, каждые 10 минут)
+    },
+}
