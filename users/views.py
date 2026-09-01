@@ -3,11 +3,13 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from materials.models import Course
 from users.models import Payment, User
 from users.permissions import IsOwnerUser
-from users.serializer import PaymentSerializer, UserSerializer
+from users.serializer import (CustomTokenObtainPairSerializer,
+                              PaymentSerializer, UserSerializer)
 from users.services import (create_stripe_price, create_stripe_product,
                             create_stripe_session)
 
@@ -52,3 +54,7 @@ class PaymentViewSet(viewsets.ModelViewSet):
         payment.session_id = session_id
         payment.link = session_url
         payment.save(update_fields=["session_id", "link", "paid_amount"])
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer

@@ -11,6 +11,7 @@ class UserAdmin(admin.ModelAdmin):
         "is_active",
         "is_staff",
         "is_superuser",
+        "last_login",
     )
     list_filter = ("is_active", "is_staff", "email", "id")
     search_fields = ("email",)

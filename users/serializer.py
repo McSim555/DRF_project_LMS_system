@@ -1,5 +1,9 @@
-from rest_framework.fields import CharField
+from django.contrib.auth import authenticate
+from django.core.exceptions import ValidationError
+from django.utils import timezone
+from rest_framework.fields import CharField, SerializerMethodField
 from rest_framework.serializers import ModelSerializer
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from users.models import Payment, User
 
@@ -43,4 +47,13 @@ class UserSerializer(ModelSerializer):
                 data.pop("last_name", None)
                 data.pop("payments", None)
                 data.pop("password", None)
+        return data
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        self.user.last_login = timezone.now()
+        self.user.save(update_fields=["last_login"])
+
         return data

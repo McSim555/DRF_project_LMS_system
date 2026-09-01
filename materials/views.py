@@ -10,6 +10,7 @@ from materials.models import Course, Lesson, Subscription
 from materials.paginators import CustomPaginator
 from materials.serializer import (CourseDetailSerializer, CourseSerializer,
                                   LessonSerializer)
+from materials.tasks import send_e_mail
 from users.permissions import IsModerator, IsNotModerator, IsOwner
 
 
@@ -42,6 +43,16 @@ class CourseViewSet(viewsets.ModelViewSet):
         elif self.action == "destroy":
             self.permission_classes = (IsOwner,)
         return super().get_permissions()
+
+    def perform_update(self, serializer):
+        """При актуализации курса отправка e-mail подписчикам"""
+        course = serializer.save()
+        subscriptions = Subscription.objects.filter(
+            course=course, user__isnull=False, user__email__isnull=False
+        ).select_related("user")
+
+        for subscription in subscriptions:
+            send_e_mail.delay(subscription.user.id, course.id)
 
 
 class LessonCreateAPIView(generics.CreateAPIView):

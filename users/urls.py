@@ -7,6 +7,8 @@ from rest_framework_simplejwt.views import (TokenObtainPairView,
 from users.apps import UsersConfig
 from users.views import PaymentViewSet, UserViewSet
 
+from .views import CustomTokenObtainPairView
+
 app_name = UsersConfig.name
 
 router = SimpleRouter()
@@ -15,7 +17,7 @@ router.register("payments", PaymentViewSet, basename="payment")
 
 
 urlpatterns = [
-    path("login/", TokenObtainPairView.as_view(), name="login"),
+    path("login/", CustomTokenObtainPairView.as_view(), name="login"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]
 
